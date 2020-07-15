@@ -1,5 +1,6 @@
+
 .set MAGIC, 0x1badb002
-.set FLAGS, (1<<0 || 1<<1)
+.set FLAGS, (1<<0 | 1<<1)
 .set CHECKSUM, -(MAGIC + FLAGS)
 
 .section .multiboot
@@ -9,21 +10,23 @@
 
 
 .section .text
-.extern kernelMain
+.extern _kernelMain
 .global loader
+
 
 loader:
     mov $kernel_stack, %esp
-    push %eax
-    push %ebx
-    call kernelMain
+    push %rax
+    push %rbx
+    call _kernelMain
+
 
 _stop:
     cli
     hlt
-    jmp_stop
+    jmp _stop
 
 
 .section .bss
-.space 2*1024*1024; #2 MB
+.space 2*1024*1024; # 2 MiB
 kernel_stack:
