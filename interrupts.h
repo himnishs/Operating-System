@@ -25,11 +25,9 @@ class InterruptManager
             uint32_t base;
         } __attribute__((packed));
         
-         static void SetInterruptDescriptorTableEntry(uint8_t interrupt,
+         static void SetInterruptDescriptorTableEntry(uint8_t interruptNUmber,
                     uint16_t codeSegmentSelectorOffset, void (*handler)(),
                     uint8_t DescriptorPrivilegeLevel, uint8_t DescriptorType);
-
-
 
     public:
         InterruptManager(GlobalDescriptorTable* gdt);
@@ -41,10 +39,6 @@ class InterruptManager
         static void HandleInterruptRequest0x00();
         static void HandleInterruptRequest0x01();
 
-        
         void Activate();
-
 };
-
-
 #endif

@@ -8,15 +8,15 @@ InterruptManager::GateDescriptor InterruptManager::interruptDescriptorTable[256]
 void InterruptManager::SetInterruptDescriptorTableEntry(uint8_t interruptNumber,
     uint16_t codeSegmentSelectorOffset, void (*handler)(), uint8_t DescriptorPrivilegeLevel, uint8_t DescriptorType)
 {
-    const uint8_t IDT_DESC_PRESENT = 0x80;
-
-    interruptDescriptorTable[interruptNumber].handlerAddressLowBits = ((uint32_t)handler) & 0xFFFF;
-    interruptDescriptorTable[interruptNumber].handlerAddressHighBits = (((uint32_t)handler) >> 16) & 0xFFFF;
+    interruptDescriptorTable[interruptNumber].handlerAddressLowBits = ((uint32_t) handler) & 0xFFFF;
+    interruptDescriptorTable[interruptNumber].handlerAddressHighBits = (((uint32_t) handler) >> 16) & 0xFFFF;
     interruptDescriptorTable[interruptNumber].gdt_codeSegmentSelector = codeSegmentSelectorOffset;
 
-    interruptDescriptorTable[interruptNumber].access = IDT_DESC_PRESENT | ((DescriptorPrivilegeLevel&3) << 5) | DescriptorType;
+    const uint8_t IDT_DESC_PRESENT = 0x80;
+    interruptDescriptorTable[interruptNumber].access = IDT_DESC_PRESENT | ((DescriptorPrivilegeLevel & 3) << 5) | DescriptorType;
     interruptDescriptorTable[interruptNumber].reserved = 0;
 }
+
 InterruptManager::InterruptManager(GlobalDescriptorTable* gdt)
 {
     uint16_t CodeSegment = gdt->CodeSegmentSelector();

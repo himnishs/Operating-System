@@ -59,9 +59,9 @@ extern "C" void kernelMain(void* multiboot_structure, uint32_t)
     printf("jdsajdjsajdjsadjsajdjsajdsajdjasjdjsajd\n");
 
     GlobalDescriptorTable gdt;
-    InterruptManager interrupts(&gdt);
+   // InterruptManager interrupts(&gdt);
 
-    interrupts.Activate();
+    //interrupts.Activate();
 
     while(1);
 }
