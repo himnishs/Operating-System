@@ -5,7 +5,7 @@
 
 class Port
 {
-    protected:
+    public:
         uint16_t portnumber;
         Port(uint16_t portnumber);
         ~Port();
@@ -13,7 +13,7 @@ class Port
 
 class Port8Bit: public Port
 {
-    protected:
+    public:
         Port8Bit(uint16_t portnumber);
         ~Port8Bit();
         virtual void Write(uint8_t data);
@@ -22,7 +22,7 @@ class Port8Bit: public Port
 
 class Port8BitSlow: public Port8Bit
 {
-    protected:
+    public:
         Port8BitSlow(uint16_t portnumber);
         ~Port8BitSlow();
         virtual void Write(uint8_t data);

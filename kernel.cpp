@@ -1,6 +1,7 @@
 #include "types.h"
 #include "gdt.h"
 #include "interrupts.h"
+#include "keyboard.h"
 
 void printf(char* str)
 {
@@ -54,14 +55,15 @@ extern "C" void callConstructors()
 
 extern "C" void kernelMain(void* multiboot_structure, uint32_t)
 {
-    printf("jdsajdjsajdjsadjsajdjsajdsajdjasjdjsajd\n");
-    printf("jdsajdjsajdjsadjsajdjsajdsajdjasjdjsajd\n");
-    printf("jdsajdjsajdjsadjsajdjsajdsajdjasjdjsajd\n");
+    printf("jdsajdjsajdjsadjsajdjsajdsajdjasjdjsajd");
+    printf("jdsajdjsajdjsadjsajdjsajdsajdjasjdjsajd");
+    printf("jdsajdjsajdjsadjsajdjsajdsajdjasjdjsajd");
 
     GlobalDescriptorTable gdt;
-   // InterruptManager interrupts(&gdt);
+    InterruptManager interrupts(&gdt);
 
-    //interrupts.Activate();
+    KeyboardDriver keyboard(&interrupts);
+    interrupts.Activate();
 
     while(1);
 }
