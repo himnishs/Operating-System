@@ -23,9 +23,6 @@ void Driver::Deactivate()
 {
 }
 
-
-
-
 DriverManager::DriverManager()
 {
     numDrivers = 0;
@@ -41,8 +38,7 @@ void DriverManager::ActivateAll()
 {
     for(int i = 0; i < numDrivers; i++)
     {
-        drivers[i]->Activate();
-    }
-        
+        drivers[i] -> Activate();
+    }   
 }
         
